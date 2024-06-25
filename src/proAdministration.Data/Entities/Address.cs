@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace proAdministration.Data.Entities;
 
-public class Address
+public class Address : ISoftDelete
 {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -18,4 +18,7 @@ public class Address
     [MaxLength(100)] public string PostalCode { get; set; } = string.Empty;
     
     [MaxLength(64)] public string Country { get; set; } = string.Empty;
+    
+    public bool IsDeleted { get; set; }
+    public DateTimeOffset? DeletedAt { get; set; }
 }

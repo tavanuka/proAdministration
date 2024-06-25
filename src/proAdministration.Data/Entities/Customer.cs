@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace proAdministration.Data.Entities;
 
-public class Customer
+public class Customer : ISoftDelete
 {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -20,6 +20,10 @@ public class Customer
     [MaxLength(10)] public string Currency { get; set; } = string.Empty;
 
     public Address Address { get; set; } = default!;
-
+    
     public int AddressId { get; set; }
+    
+    public bool IsDeleted { get; set; }
+    
+    public DateTimeOffset? DeletedAt { get; set; }
 }
