@@ -26,6 +26,9 @@ builder.Services.AddScoped<ICustomerService, CustomerService>();
 
 var app = builder.Build();
 
+app.UseCors(policyBuilder => policyBuilder.WithOrigins("*")
+    .AllowAnyMethod()
+    .AllowAnyHeader());
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -34,6 +37,7 @@ if (app.Environment.IsDevelopment())
     app.UseHttpsRedirection();
 }
 
+app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
