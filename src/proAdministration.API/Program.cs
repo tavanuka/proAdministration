@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using MySqlConnector;
 using proAdministration.API.Mapping;
+using proAdministration.API.Services;
 using proAdministration.Data.Contexts;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -20,6 +21,7 @@ builder.Services.AddSwaggerGen();
 
 // Add operation services.
 builder.Services.AddMapping();
+builder.Services.AddScoped<ICustomerService, CustomerService>();
 
 
 var app = builder.Build();
