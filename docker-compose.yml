@@ -1,0 +1,22 @@
+﻿version: '3.9'
+services:
+  db:
+    image: mysql:8.0.33
+    container_name: proadministration_db
+    restart: always
+    environment:
+      MYSQL_RANDOM_ROOT_PASSWORD: 1
+      MYSQL_DATABASE: proadministration
+      MYSQL_USER: 
+      MYSQL_PASSWORD:
+    volumes:
+      - dbdata:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    healthcheck:
+      test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
+      timeout: 12s
+      retries: 10
+          
+volumes:
+  dbdata:
