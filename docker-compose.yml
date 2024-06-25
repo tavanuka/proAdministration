@@ -1,5 +1,4 @@
-﻿version: '3.9'
-services:
+﻿services:
   db:
     image: mysql:8.0.33
     container_name: proadministration_db
@@ -17,6 +16,20 @@ services:
       test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
       timeout: 12s
       retries: 10
-          
+        
+  api:
+    container_name: proadministration_api
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8080:8080"
+    environment:
+      # ASPNETCORE_ENVIRONMENT: Production
+      ConnectionStrings__DefaultConnection:
+    build:
+      context: .
+      dockerfile: src/proAdministration.API/Dockerfile
+
 volumes:
   dbdata:
