@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Net;
 using Microsoft.AspNetCore.Mvc;
 
 namespace proAdministration.API.Exceptions;
@@ -15,9 +16,9 @@ public static class ExceptionExtensions
         return exception switch
         {
             CustomException customException => new ObjectResult(customException.Message)
-            {
-                StatusCode = (int)customException.StatusCode
-            },
+                { StatusCode = (int)customException.StatusCode },
+            ValidationException validationException => new ObjectResult(validationException.Message)
+                { StatusCode = (int)HttpStatusCode.BadRequest },
             _ => new ObjectResult(exception.Message) { StatusCode = (int)HttpStatusCode.InternalServerError }
         };
     }
