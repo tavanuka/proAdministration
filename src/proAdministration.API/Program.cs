@@ -44,6 +44,7 @@ builder.Services
 
 // Add operation services.
 builder.Services.AddMapping();
+builder.Services.AddScoped<IFirstVoucherService, FirstVoucherService>();
 builder.Services.AddScoped<ICustomerService, CustomerService>();
 
 var app = builder.Build();
