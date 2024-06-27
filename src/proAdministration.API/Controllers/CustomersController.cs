@@ -16,7 +16,7 @@ public class CustomersController(ICustomerService customerService) : ControllerB
     {
         var result = await customerService.GetList(customerId);
         return result.Match<IActionResult>(
-            Ok, 
+            Ok,
             ex => ex.ToResponse());
     }
 
@@ -27,7 +27,7 @@ public class CustomersController(ICustomerService customerService) : ControllerB
     {
         var result = await customerService.GetById(customerId);
         return result.Match<IActionResult>(
-            Ok, 
+            Ok,
             ex => ex.ToResponse());
     }
 
