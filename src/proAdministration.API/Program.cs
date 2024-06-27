@@ -37,9 +37,11 @@ builder.Services.AddSwaggerGen();
 
 // Add REST services to connect to the first-voucher API
 builder.Services.AddTransient<FirstVoucherAuthenticationHeaderHandler>();
+builder.Services.AddTransient<HttpLoggingHandler>();
 builder.Services
     .AddRefitClient<IFirstVoucherApi>()
     .ConfigureHttpClient(c => c.BaseAddress = new Uri(settings.Uri))
+    .AddHttpMessageHandler<HttpLoggingHandler>()
     .AddHttpMessageHandler<FirstVoucherAuthenticationHeaderHandler>();
 
 // Add operation services.
